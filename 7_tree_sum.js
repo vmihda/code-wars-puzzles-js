@@ -47,20 +47,17 @@ function treeSum(tree) {
 	return sum
 }
 
-function treeSumRec(tree, sum = 0) {
+function treeSumRec(tree) {
 
-	for (const treeElement of tree) {
+	let sum = 0;
+
+	tree.forEach((treeElement) => {
+		sum += treeElement.v
 		if (!treeElement.c) {
-			sum += treeElement.v
+			return treeElement.v
 		}
-	}
-
-	for (const treeElement of tree) {
-		if (treeElement.c) {
-			sum += treeElement.v
-			return treeSumRec(treeElement.c, sum)
-		}
-	}
+		sum += treeSumRec(treeElement.c)
+	})
 
 	return sum
 }
